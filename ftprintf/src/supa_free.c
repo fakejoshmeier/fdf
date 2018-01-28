@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   supa_free.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/10 18:55:21 by jmeier            #+#    #+#             */
-/*   Updated: 2018/01/27 21:25:55 by jmeier           ###   ########.fr       */
+/*   Created: 2017/12/12 12:24:03 by jmeier            #+#    #+#             */
+/*   Updated: 2017/12/12 12:25:53 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fdf.h>
+#include "ft_printf.h"
 
-void	error(char *str)
+void	supa_free(char *s1, char *s2, char *s3)
 {
-	ft_putstr("Error: ");
-	ft_putstr(str);
-	exit(0);
-}
-
-int		main(int ac, char *av[])
-{
-	t_xyz	*fdf;
-
-	ac == 2 ? 0 : error("Usage ./fdf [TEST.fdf]\n");
-	ft_strstr(av[1], ".fdf") ? 0 : error("Invalid filetype\n");
-	fdf = ft_memalloc(sizeof(t_xyz *));
-	parse_suite(fdf, av[1]);
-
-	return (0);
+	free(s1);
+	s1 = NULL;
+	free(s2);
+	s2 = NULL;
+	free(s3);
+	s3 = NULL;
 }
