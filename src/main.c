@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 18:55:21 by jmeier            #+#    #+#             */
-/*   Updated: 2018/02/05 20:20:57 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/02/05 21:56:48 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int		main(int ac, char *av[])
 	t_xyz	*fdf;
 	t_vis	zen;
 
-	init_vis(zen);
 	ac == 2 ? 0 : error("Usage ./fdf [TEST.fdf]\n");
 	ft_strstr(av[1], ".fdf") ? 0 : error("Invalid filetype\n");
 	fdf = ft_memalloc(sizeof(t_xyz *));
@@ -34,7 +33,7 @@ int		main(int ac, char *av[])
 	zen.img = mlx_new_image(zen.mlx, 1000, 1000);
 	zen.canvas = (int*)mlx_get_data_addr(zen.img, &bits, &s_line, &endian);
 	zen.canvas[x + (y * s_line / 4)] = zen.color;
-	mlx_put_image_to_window(zen.mlx, zen.win, zen.img, x, y);
+	mlx_put_image_to_window(zen.mlx, zen.win, zen.img, 500, 500);
 	destroy_image(zen.mlx, zen.img);
 	return (0);
 }
