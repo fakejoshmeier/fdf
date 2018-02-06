@@ -6,11 +6,31 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 19:59:42 by jmeier            #+#    #+#             */
-/*   Updated: 2018/01/27 21:12:08 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/02/05 21:29:11 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
+
+void	twister(t_xyz *fdf)
+{
+	int		r;
+	int		c;
+
+	r = -1;
+	fdf->twist = ft_memalloc(sizeof(t_jig *) * fdf->row);
+	while (++r < fdf->row)
+	{
+		fdf->twist[r] = ft_memalloc(sizeof(t_jig) * fdf->col);
+		c = -1;
+		while (++c < fdf->col)
+		{
+			fdf->twist[r][c].x = r;
+			fdf->twist[r][c].y = c;
+			fdf->twist[r][c].z = fdf->bumps[r][c]
+		}
+	}
+}
 
 void	cannibalize(t_xyz *fdf, int fd)
 {
@@ -34,6 +54,7 @@ void	cannibalize(t_xyz *fdf, int fd)
 		}
 		free(tmp);
 	}
+	free(str);
 	close(fd);
 }
 
@@ -62,6 +83,7 @@ void	validate(t_xyz *fdf, int fd)
 		free(grid);
 	}
 	fdf->bumps = ft_memalloc(sizeof(int *) * fdf->row);
+	free(str);
 	close(fd);
 }
 
@@ -73,4 +95,5 @@ void	parse_suite(t_xyz *fdf, char *av)
 	validate(fdf, fd);
 	fd = open(av, O_RDONLY);
 	cannibalize(fdf, fd);
+	twister(fdf);
 }
