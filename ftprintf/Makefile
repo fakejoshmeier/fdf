@@ -6,7 +6,7 @@
 #    By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/30 14:06:03 by jmeier            #+#    #+#              #
-#    Updated: 2018/01/19 16:56:35 by jmeier           ###   ########.fr        #
+#    Updated: 2018/02/07 15:50:58 by jmeier           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,21 +50,28 @@ H_LOCS = -I inc/ -I libft/inc/
 
 C_FLAGS = -Wall -Werror -Wextra
 
-all:  $(NAME)
+PREF = /bin/echo "「"
 
-$(NAME):$(O_SRC)
-	@echo Compiling $@ library...
+all:dumb $(NAME)
+
+dumb:
+	@/bin/echo -n "「"
+
+$(NAME): $(O_SRC)
 	@ar rcs $@ $(O_SRC)
+	@/bin/echo -n "オラ"
 	@ranlib $(NAME)
+	@/bin/echo -n "ーー！」"
 	@echo ...Successfully compiled $@ library
 
-$(O_LOC)%.o: $(C_LOC)%.c
-	@echo Re-compiling $< file...
+$(O_LOC)%.o:$(C_LOC)%.c
 	@gcc $(C_FLAGS) $(H_LOCS) -o $@ -c $<
+	@/bin/echo -n "オラ"
 
 $(O_LOC)%.o: $(LIB_LOC)%.c
-	@echo Re-compiling $< file...
+	@/bin/echo -n "オラ"
 	@gcc $(C_FLAGS) $(H_LOCS) -o $@ -c $<
+
 
 clean:
 	@echo Cleaning .o files ...
