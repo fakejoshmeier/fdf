@@ -6,13 +6,13 @@
 #    By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/06 17:01:42 by jmeier            #+#    #+#              #
-#    Updated: 2018/01/27 18:35:42 by jmeier           ###   ########.fr        #
+#    Updated: 2018/02/07 17:49:42 by jmeier           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-FUNC = main parse
+FUNC = main parse rot
 
 C_LOC = src/
 C_NAM = $(addsuffix .c, $(FUNC))
@@ -26,38 +26,46 @@ LIB_LOC = ftprintf/
 LIB_NAM = libftprintf.a
 LIB_SRC = $(addprefix $(LIB_LOC), $(LIB_NAM))
 
-H_LOC = -I inc/ -I ftprintf/inc -I ftprintf/libft/inc
+MLX = mlx/libmlx.a
+
+MLX_FLAGS = -L mlx -lmlx -framework OpenGL -framework Appkit -g
+
+H_LOC = -I inc/ -I ftprintf/inc -I ftprintf/libft/inc -I mlx/
 HEADERS = inc/*.h
 
 all: $(NAME)
 
-$(NAME): $(O_SRC) $(LIB_SRC)
-	@echo Compiling...
-	@gcc -Wall -Werror -Wextra $^ -o $(NAME)
-	@echo Complete.  Dope.
+$(NAME): $(MLX) $(LIB_SRC) $(O_SRC)
+	@/bin/echo -n "無駄"
+	@gcc -Wall -Werror -Wextra $(MLX_FLAGS) -lpthread $^ -o $(NAME)
+	@/bin/echo -n "ァァ！」"
+	@echo "\nそして、時は動き出す。"
 
 $(O_LOC)%.o: $(C_LOC)%.c $(HEADERS)
-	@echo Recompiling...
+	@/bin/echo -n "無駄"
 	@gcc -Wall -Werror -Wextra $(H_LOC) -o $@ -c $<
+	@/bin/echo -n "無駄"
 
 $(LIB_SRC): force
-	@echo Compiling libft...
 	@make -C $(LIB_LOC)
+	@echo
+	@/bin/echo -n "「無駄だ！無駄"
+
+$(MLX): force
+	@make -C mlx
 
 force:
 	@true
 
 clean:
-	@echo Cleaning .o files...
+	@echo "ザ・ワールド！"
 	@/bin/rm -f $(O_SRC)
-	@make clean -C $(LIB_LOC)
-	@echo .o files removed.
+	@make clean -C mlx
 
 fclean: clean
-	@echo Cleaning $(NAME) ...
 	@/bin/rm -f $(NAME)
 	@make fclean -C $(LIB_LOC)
-	@echo $(NAME) removed
+	@echo "時よ止まれ！"
 
 re: fclean all
 
