@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 18:55:21 by jmeier            #+#    #+#             */
-/*   Updated: 2018/02/08 00:05:11 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/02/08 00:55:05 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	first_things_first(t_xyz *fdf, t_vis *zen)
 {
+	ft_bzero(zen, sizeof(t_vis));
 	fdf->rot_y = 583;
 	zen->size = 1000;
 }
@@ -40,7 +41,7 @@ int		main(int ac, char *av[])
 	zen.size > 0 ? 0 : error("Window Size Untenable\n");
 	rot_suite(fdf);
 	scale(fdf, &zen);
-	draw(fdf, &zen);
+	first_draw(fdf, &zen);
 	//	zen.img = mlx_new_image(zen.mlx, zen.img_dim, zen.img_dim);
 
 

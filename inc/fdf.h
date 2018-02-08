@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 10:54:50 by jmeier            #+#    #+#             */
-/*   Updated: 2018/02/08 00:18:48 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/02/08 01:16:24 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,39 +19,39 @@
 
 typedef struct	s_jig
 {
-	int			iro;
-	double		x;
-	double		y;
-	double		z;
-	double		crossz;
-}				t_jig;
+	unsigned int	iro;
+	double			x;
+	double			y;
+	double			z;
+	double			crossz;
+}					t_jig;
 
-typedef struct	s_xyz
+typedef struct		s_xyz
 {
-	int			col;
-	int			row;
-	int			**bumps;
-	t_jig		**twist;
-	double		rot_y;
-	double		rot_z;
-	double		rot_x;
-	double		scale;
-	double		x_it;
-	double		y_it;
-}				t_xyz;
+	int				col;
+	int				row;
+	int				**bumps;
+	t_jig			**twist;
+	double			rot_y;
+	double			rot_z;
+	double			rot_x;
+	double			scale;
+	double			x_it;
+	double			y_it;
+}					t_xyz;
 
-typedef struct	s_vis
+typedef struct		s_vis
 {
-	void		*mlx;
-	void		*win;
-	void		*img;
-	int			*canvas;
-	int			bits;
-	int			endian;
-	int			s_line;
-	int			color;
-	int			size;
-}				t_vis;
+	void			*mlx;
+	void			*win;
+	void			*img;
+	int				*canvas;
+	int				bits;
+	int				endian;
+	int				s_line;
+	int				color;
+	int				size;
+}					t_vis;
 
 void			error(char *str);
 
