@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 19:59:42 by jmeier            #+#    #+#             */
-/*   Updated: 2018/02/07 16:45:31 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/02/07 22:41:55 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@ void	twister(t_xyz *f)
 	while (++r < f->row)
 	{
 		f->twist[r] = ft_memalloc(sizeof(t_jig) * f->col);
+		ft_bzero(f->twist[r], f->col);
 		c = -1;
 		while (++c < f->col)
 		{
-			f->twist[r][c].x = (double)r;
-			f->twist[r][c].y = (double)c;
-			f->twist[r][c].z = (double)f->bumps[r][c];
+			f->twist[r][c].x = r;
+			f->twist[r][c].y = c;
+			f->twist[r][c].z = f->bumps[r][c];
 			if (f->bumps[r][c] == 0)
 				f->twist[r][c].iro = 0xFFFFFF;
 			else

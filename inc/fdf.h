@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 10:54:50 by jmeier            #+#    #+#             */
-/*   Updated: 2018/02/07 16:56:21 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/02/08 00:18:48 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ typedef struct	s_xyz
 	double		rot_y;
 	double		rot_z;
 	double		rot_x;
+	double		scale;
+	double		x_it;
+	double		y_it;
 }				t_xyz;
 
 typedef struct	s_vis
@@ -42,7 +45,6 @@ typedef struct	s_vis
 	void		*mlx;
 	void		*win;
 	void		*img;
-	int			img_dim;
 	int			*canvas;
 	int			bits;
 	int			endian;
@@ -52,14 +54,16 @@ typedef struct	s_vis
 }				t_vis;
 
 void			error(char *str);
-void			twister(t_xyz *fdf);
+
 void			parse_suite(t_xyz *fdf, char *av);
 void			validate(t_xyz *fdf, int fd);
 void			cannibalize(t_xyz *fdf, int fd);
+void			twister(t_xyz *fdf);
 
 void			rot_suite(t_xyz *fdf);
 void			x_rot(t_xyz *fdf, double rad, int r, int c);
 void			y_rot(t_xyz *fdf, double rad, int r, int c);
 void			z_rot(t_xyz *fdf, double rad, int r, int c);
 
+void			scale(t_xyz *fdf, t_vis *zen);
 #endif
