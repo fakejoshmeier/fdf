@@ -6,28 +6,32 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 19:59:42 by jmeier            #+#    #+#             */
-/*   Updated: 2018/02/05 21:29:11 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/02/07 16:45:31 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-void	twister(t_xyz *fdf)
+void	twister(t_xyz *f)
 {
 	int		r;
 	int		c;
 
 	r = -1;
-	fdf->twist = ft_memalloc(sizeof(t_jig *) * fdf->row);
-	while (++r < fdf->row)
+	f->twist = ft_memalloc(sizeof(t_jig *) * f->row);
+	while (++r < f->row)
 	{
-		fdf->twist[r] = ft_memalloc(sizeof(t_jig) * fdf->col);
+		f->twist[r] = ft_memalloc(sizeof(t_jig) * f->col);
 		c = -1;
-		while (++c < fdf->col)
+		while (++c < f->col)
 		{
-			fdf->twist[r][c].x = r;
-			fdf->twist[r][c].y = c;
-			fdf->twist[r][c].z = fdf->bumps[r][c]
+			f->twist[r][c].x = (double)r;
+			f->twist[r][c].y = (double)c;
+			f->twist[r][c].z = (double)f->bumps[r][c];
+			if (f->bumps[r][c] == 0)
+				f->twist[r][c].iro = 0xFFFFFF;
+			else
+				f->twist[r][c].iro = f->bumps[r][c] > 0 ? 0x66023c : 0x02662c;
 		}
 	}
 }
