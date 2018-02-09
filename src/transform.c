@@ -6,13 +6,13 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 23:46:11 by jmeier            #+#    #+#             */
-/*   Updated: 2018/02/08 00:05:13 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/02/08 22:24:15 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-void	scale(t_xyz *fdf, t_vis *zen)
+void	scale(t_xyz *fdf)
 {
 	int		r;
 	int		c;
@@ -25,15 +25,36 @@ void	scale(t_xyz *fdf, t_vis *zen)
 		c = -1;
 		while (++c < fdf->col)
 		{
-			xs = (fdf->twist[r][c].x * (zen->size / (fdf->col + 1)) / 2) *
+			xs = (fdf->twist[r][c].x * (fdf->size / (fdf->col + 1)) / 2) *
 				(fdf->scale * fdf->scale);
-			ys = (fdf->twist[r][c].y * (zen->size / (fdf->row + 1)) / 2) *
+			ys = (fdf->twist[r][c].y * (fdf->size / (fdf->row + 1)) / 2) *
 				(fdf->scale * fdf->scale);
-			fdf->twist[r][c].x = xs + fdf->x_it + (zen->size / 4);
-			fdf->twist[r][c].y = ys + fdf->y_it + (zen->size / 4);
-			fdf->twist[r][c].z *= (zen->size /100);
+			fdf->twist[r][c].x = xs + fdf->x_it + (fdf->size / 4);
+			fdf->twist[r][c].y = ys + fdf->y_it + (fdf->size / 4);
+			fdf->twist[r][c].z *= (fdf->size /100);
 		}
 	}
 }
 
+void	apply_to(t_xyz *fdf, double iter, char check)
+{
+	int r;
+	int c;
 
+	r = -1;
+	if (check == 'y')
+		fdf->y_it += iter;
+	if (check == 'x')
+		fdf->x_it += iter;
+	while (++r < fdf->row)
+	{
+		c = -1;
+		while (++c < fdf->col)
+		{
+			if (check == 'y')
+				fdf->twist[r][c].y += iter;
+			if (check == 'x')
+				fdf->twist[r][c].x += iter;
+		}
+	}
+}

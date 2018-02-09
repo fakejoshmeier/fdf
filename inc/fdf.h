@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 10:54:50 by jmeier            #+#    #+#             */
-/*   Updated: 2018/02/08 01:16:24 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/02/08 22:22:46 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,6 @@ typedef struct		s_xyz
 	double			scale;
 	double			x_it;
 	double			y_it;
-}					t_xyz;
-
-typedef struct		s_vis
-{
 	void			*mlx;
 	void			*win;
 	void			*img;
@@ -51,7 +47,19 @@ typedef struct		s_vis
 	int				s_line;
 	int				color;
 	int				size;
-}					t_vis;
+}					t_xyz;
+
+typedef struct		s_bres
+{
+	t_jig			a;
+	t_jig			b;
+	int				dx;
+	int				dy;
+	int				sx;
+	int				sy;
+	int				swap;
+	int				err;
+}					t_bres;
 
 void			error(char *str);
 
@@ -65,5 +73,22 @@ void			x_rot(t_xyz *fdf, double rad, int r, int c);
 void			y_rot(t_xyz *fdf, double rad, int r, int c);
 void			z_rot(t_xyz *fdf, double rad, int r, int c);
 
-void			scale(t_xyz *fdf, t_vis *zen);
+void			scale(t_xyz *fdf);
+void			apply_to(t_xyz *fdf, double iter, char check);
+
+void			colorize(t_xyz *fdf, t_bres breezy, int r, int c);
+void			draw(t_xyz *fdf, int r, int c, char check);
+void			intake(t_xyz *fdf);
+void			first_draw(t_xyz *fdf);
+
+int				zoom_hook(int keycode, t_xyz *fdf);
+void			pan_hook(int keycode, t_xyz *fdf);
+void			rot_hook(int keycode, t_xyz *fdf);
+void			rot_n_scale(t_xyz *fdf);
+void			apply_n_draw(t_xyz *fdf, int iter, char check);
+
+t_bres			bresenham(t_jig a, t_jig b);
+void			ss1(t_bres breezy);
+void			ss2(t_bres breezy);
+unsigned int	blend(unsigned int c1, unsigned int c2);
 #endif

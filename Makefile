@@ -6,13 +6,13 @@
 #    By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/06 17:01:42 by jmeier            #+#    #+#              #
-#    Updated: 2018/02/07 17:49:42 by jmeier           ###   ########.fr        #
+#    Updated: 2018/02/08 22:21:29 by jmeier           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-FUNC = main parse rot
+FUNC = main parse rot ss transform draw bresenham hooks
 
 C_LOC = src/
 C_NAM = $(addsuffix .c, $(FUNC))
