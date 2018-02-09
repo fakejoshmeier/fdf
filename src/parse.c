@@ -6,11 +6,24 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 19:59:42 by jmeier            #+#    #+#             */
-/*   Updated: 2018/02/07 22:41:55 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/02/09 01:45:14 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
+
+int		garbage_check(char *str)
+{
+	int		i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (ft_isalpha(str[i]) || ft_isspace(str[i]))
+			return (1);
+	}
+	return (0);
+}
 
 void	twister(t_xyz *f)
 {
@@ -33,6 +46,7 @@ void	twister(t_xyz *f)
 				f->twist[r][c].iro = 0xFFFFFF;
 			else
 				f->twist[r][c].iro = f->bumps[r][c] > 0 ? 0x66023c : 0x02662c;
+			f->twist[r][c].crossz = f->twist[r][c].z;
 		}
 	}
 }
@@ -53,7 +67,10 @@ void	cannibalize(t_xyz *fdf, int fd)
 		{
 			fdf->bumps[i] = ft_memalloc(sizeof(int) * fdf->col);
 			while (++j < fdf->col)
+			{
+				garbage_check(tmp[j]) == 0 ? 0 : error("Invalid characters\n");
 				fdf->bumps[i][j] = ft_atoi(tmp[j]);
+			}
 			j = -1;
 			break ;
 		}

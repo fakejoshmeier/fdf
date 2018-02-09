@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 21:47:51 by jmeier            #+#    #+#             */
-/*   Updated: 2018/02/08 22:26:56 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/02/08 23:46:19 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	apply_n_draw(t_xyz *fdf, int iter, char check)
 ** 89) //7/left pressed
 */
 
-void	pan_hook(int keycode, t_xyz *fdf)
+int		pan_hook(int keycode, t_xyz *fdf)
 {
 	if (keycode == 92)
 	{
@@ -57,6 +57,7 @@ void	pan_hook(int keycode, t_xyz *fdf)
 		apply_n_draw(fdf, 10, 'y');
 	if (keycode == 2)
 		apply_n_draw(fdf, 10, 'x');
+	return (0);
 }
 
 /*
@@ -66,7 +67,7 @@ void	pan_hook(int keycode, t_xyz *fdf)
 ** 123 left pressed
 */
 
-void	rot_hook(int keycode, t_xyz *fdf)
+int		rot_hook(int keycode, t_xyz *fdf)
 {
 	if (keycode == 126)
 	{
@@ -92,6 +93,7 @@ void	rot_hook(int keycode, t_xyz *fdf)
 		fdf->rot_z -= 1;
 		first_draw(fdf);
 	}
+	return (0);
 }
 
 /*

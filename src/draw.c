@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 00:55:22 by jmeier            #+#    #+#             */
-/*   Updated: 2018/02/08 21:38:13 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/02/09 01:30:39 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,26 +41,37 @@ void				draw(t_xyz *fdf, int r, int c, char check)
 	t_bres			breezy;
 	int				r1;
 	int				c1;
-	int				i;
 
 	r1 = check == 'r' ? r + 1 : r;
 	c1 = check == 'c' ? c + 1 : c;
 	breezy = bresenham(fdf->twist[r][c], fdf->twist[r1][c1]);
-	i = -1;
-	while (++i <= breezy.dx)
+	breezy.numerator = breezy.longest >> 1;
+	while (++breezy.i <= breezy.longest)
 	{
-		colorize(fdf, breezy, r, c);
-		while (breezy.err > 0)
-			ss1(breezy);
-		ss2(breezy);
+//		colorize(fdf, breezy, r, c);
+		mlx_pixel_put(fdf->mlx, fdf->win, breezy.x1, breezy.y1,
+			blend(breezy.a.iro, breezy.b.iro));
+		breezy.numerator += breezy.shortest;
+		if (breezy.numerator > breezy.longest)
+		{
+			breezy.numerator -= breezy.longest;
+			breezy.x1 += breezy.dx1;
+			breezy.y1 += breezy.dy1;
+		}
+		else
+		{
+			breezy.x1 += breezy.dx2;
+			breezy.y1 += breezy.dy2;
+		}
 	}
 }
 
-void				intake(t_xyz *fdf)
+void				first_draw(t_xyz *fdf)
 {
 	int				r;
 	int				c;
 
+	mlx_clear_window(fdf->mlx, fdf->win);
 	r = -1;
 	while (++r < fdf->row)
 	{
@@ -73,12 +84,12 @@ void				intake(t_xyz *fdf)
 	}
 }
 
-void				first_draw(t_xyz *fdf)
-{
-	fdf->img = mlx_new_image(fdf->mlx, fdf->size, fdf->size);
-	fdf->canvas = (int *)mlx_get_data_addr(fdf->img, &fdf->bits, &fdf->s_line,
-		&fdf->endian);
-	intake(fdf);
-	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img, 0, 0);
-	mlx_destroy_image(fdf->mlx, fdf->img);
-}
+//void				first_draw(t_xyz *fdf)
+//{
+//	fdf->img = mlx_new_image(fdf->mlx, fdf->size, fdf->size);
+//	fdf->canvas = (int *)mlx_get_data_addr(fdf->img, &fdf->bits, &fdf->s_line,
+//		&fdf->endian);
+//	intake(fdf);
+//	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img, 0, 0);
+//	mlx_destroy_image(fdf->mlx, fdf->img);
+//}

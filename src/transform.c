@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 23:46:11 by jmeier            #+#    #+#             */
-/*   Updated: 2018/02/08 22:24:15 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/02/09 01:27:30 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	scale(t_xyz *fdf)
 				(fdf->scale * fdf->scale);
 			fdf->twist[r][c].x = xs + fdf->x_it + (fdf->size / 4);
 			fdf->twist[r][c].y = ys + fdf->y_it + (fdf->size / 4);
-			fdf->twist[r][c].z *= (fdf->size /100);
+			fdf->twist[r][c].z = fdf->twist[r][c].z * (fdf->size / 100);
 		}
 	}
 }
