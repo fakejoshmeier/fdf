@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 21:47:51 by jmeier            #+#    #+#             */
-/*   Updated: 2018/02/08 23:46:19 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/02/10 15:15:52 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,10 @@ void	apply_n_draw(t_xyz *fdf, int iter, char check)
 **  0 - A pressed
 **  1 - S pressed
 **  2 - D pressed
-** 92) //9/right pressed
-** 89) //7/left pressed
 */
 
 int		pan_hook(int keycode, t_xyz *fdf)
 {
-	if (keycode == 92)
-	{
-		rot_suite(fdf);
-		scale(fdf);
-		fdf->rot_y += 1;
-		first_draw(fdf);
-	}
-	if (keycode == 89)
-	{
-		rot_suite(fdf);
-		scale(fdf);
-		fdf->rot_y -= 1;
-		first_draw(fdf);
-	}
 	if (keycode == 13)
 		apply_n_draw(fdf, -10, 'y');
 	if (keycode == 0)
@@ -107,14 +91,14 @@ int		zoom_hook(int keycode, t_xyz *fdf)
 		exit(1);
 	pan_hook(keycode, fdf);
 	rot_hook(keycode, fdf);
-	if (keycode == 69)
+	if (keycode == 27)
 	{
 		fdf->scale += .01;
 		rot_suite(fdf);
 		scale(fdf);
 		first_draw(fdf);
 	}
-	if (keycode == 78)
+	if (keycode == 24)
 	{
 		fdf->scale -= .01;
 		rot_suite(fdf);

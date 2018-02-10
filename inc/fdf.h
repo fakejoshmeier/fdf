@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 10:54:50 by jmeier            #+#    #+#             */
-/*   Updated: 2018/02/09 01:44:51 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/02/10 15:14:39 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct		s_bres
 }					t_bres;
 
 void			error(char *str);
+void			first_things_first(t_xyz *fdf);
 
 void			parse_suite(t_xyz *fdf, char *av);
 void			validate(t_xyz *fdf, int fd);

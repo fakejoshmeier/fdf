@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 00:55:22 by jmeier            #+#    #+#             */
-/*   Updated: 2018/02/09 01:30:39 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/02/10 15:19:01 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,41 @@ unsigned int		blend(unsigned int c1, unsigned int c2)
 	return (ret);
 }
 
-void				colorize(t_xyz *fdf, t_bres breezy, int r, int c)
+void	fillin(t_bres *ret)
 {
-	int				pos;
+	ret->dx1 = ret->w < 0 ? -1 : 1;
+	ret->dy1 = ret->h < 0 ? -1 : 1;
+	ret->dx2 = ret->w < 0 ? -1 : 1;
+	ret->longest = ret->w > 0 ? ret->w : -1 * ret->w;
+	ret->shortest = ret->h > 0 ? ret->h : -1 * ret->h;
+	if (ret->longest < ret->shortest)
+	{
+		ret->longest = ret->h > 0 ? ret->h : -1 * ret->h;
+		ret->shortest = ret->w > 0 ? ret->w : -1 * ret->w;
+		ret->dy2 = ret->h < 0 ? -1 : 1;
+		ret->dx2 = 0;
+	}
+}
 
-	pos = c + (r * fdf->s_line / 4);
-	if (pos >= 0 && pos < fdf->size * fdf->size)
-		if ((c >= 0 && c < fdf->col) && (r >= 0 && r < fdf->row))
-			fdf->canvas[pos] = blend(breezy.a.iro, breezy.b.iro);
+t_bres	bresenham(t_jig a, t_jig b)
+{
+	t_bres	ret;
+
+	ret.a = a;
+	ret.b = b;
+	ret.x1 = a.x;
+	ret.y1 = a.y;
+	ret.x2 = b.x;
+	ret.y2 = b.y;
+	ret.i = -1;
+	ret.w = ret.x2 - ret.x1;
+	ret.h = ret.y2 - ret.y1;
+	ret.dx1 = 0;
+	ret.dy1 = 0;
+	ret.dx2 = 0;
+	ret.dy2 = 0;
+	fillin(&ret);
+	return (ret);
 }
 
 void				draw(t_xyz *fdf, int r, int c, char check)
@@ -48,7 +75,6 @@ void				draw(t_xyz *fdf, int r, int c, char check)
 	breezy.numerator = breezy.longest >> 1;
 	while (++breezy.i <= breezy.longest)
 	{
-//		colorize(fdf, breezy, r, c);
 		mlx_pixel_put(fdf->mlx, fdf->win, breezy.x1, breezy.y1,
 			blend(breezy.a.iro, breezy.b.iro));
 		breezy.numerator += breezy.shortest;
@@ -83,13 +109,3 @@ void				first_draw(t_xyz *fdf)
 		}
 	}
 }
-
-//void				first_draw(t_xyz *fdf)
-//{
-//	fdf->img = mlx_new_image(fdf->mlx, fdf->size, fdf->size);
-//	fdf->canvas = (int *)mlx_get_data_addr(fdf->img, &fdf->bits, &fdf->s_line,
-//		&fdf->endian);
-//	intake(fdf);
-//	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img, 0, 0);
-//	mlx_destroy_image(fdf->mlx, fdf->img);
-//}

@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 18:55:21 by jmeier            #+#    #+#             */
-/*   Updated: 2018/02/09 01:46:06 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/02/10 15:05:36 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ int		main(int ac, char *av[])
 	first_things_first(&fdf);
 	fdf.mlx = mlx_init();
 	fdf.win = mlx_new_window(fdf.mlx, fdf.size, fdf.size, av[1]);
-//	fdf.img = mlx_new_image(fdf.mlx, fdf.size, fdf.size);
-//	fdf.canvas = (int *)mlx_get_data_addr(fdf.img, &fdf.bits, &fdf.s_line,
-//		&fdf.endian);
 	fdf.size > 0 ? 0 : error("Window Size Untenable\n");
 	rot_suite(&fdf);
 	scale(&fdf);
