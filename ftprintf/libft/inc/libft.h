@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 12:01:46 by jmeier            #+#    #+#             */
-/*   Updated: 2017/12/12 19:13:54 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/02/11 00:21:10 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,8 @@ char				*ft_strstr(const char *big, const char *little);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strtrim(char const *s);
 int					ft_sqrt(unsigned int nb);
+int					ft_pow(int nb, int ex);
+int					ft_atoi_base(char *nb, int base);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
 #endif

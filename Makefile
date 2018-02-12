@@ -6,13 +6,13 @@
 #    By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/06 17:01:42 by jmeier            #+#    #+#              #
-#    Updated: 2018/02/10 15:19:28 by jmeier           ###   ########.fr        #
+#    Updated: 2018/02/12 13:09:58 by jmeier           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-FUNC = main parse rot transform draw hooks
+FUNC = main parse rot transform draw hooks freeing
 
 C_LOC = src/
 C_NAM = $(addsuffix .c, $(FUNC))

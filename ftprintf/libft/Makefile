@@ -6,7 +6,7 @@
 #    By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/18 21:04:05 by jmeier            #+#    #+#              #
-#    Updated: 2017/12/12 19:14:09 by jmeier           ###   ########.fr        #
+#    Updated: 2018/02/11 00:21:34 by jmeier           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,7 @@ LIST = ft_atoi ft_bzero ft_isalnum ft_isalpha ft_isascii ft_strstr \
 		ft_putlong ft_putlong_lc ft_putulong ft_putunbr_base_lc ft_putwstr \
 		ft_isvalue ft_numlen ft_putchars ft_putnbrf ft_unumlen ft_longlen \
 		ft_ulonglen ft_ulonglonglen ft_longlonglen ft_putstrn ft_putull \
-		ft_puthex ft_putlhex ft_putoct ft_ld
-
+		ft_puthex ft_putlhex ft_putoct ft_ld ft_atoi_base ft_pow
 
 C_LOC = src/
 C_NAM = $(addsuffix .c, $(LIST))

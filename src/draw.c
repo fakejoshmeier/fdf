@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 00:55:22 by jmeier            #+#    #+#             */
-/*   Updated: 2018/02/10 15:19:01 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/02/10 17:43:10 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ unsigned int		blend(unsigned int c1, unsigned int c2)
 	return (ret);
 }
 
-void	fillin(t_bres *ret)
+void				fillin(t_bres *ret)
 {
 	ret->dx1 = ret->w < 0 ? -1 : 1;
 	ret->dy1 = ret->h < 0 ? -1 : 1;
@@ -42,9 +42,9 @@ void	fillin(t_bres *ret)
 	}
 }
 
-t_bres	bresenham(t_jig a, t_jig b)
+t_bres				bresenham(t_jig a, t_jig b)
 {
-	t_bres	ret;
+	t_bres			ret;
 
 	ret.a = a;
 	ret.b = b;

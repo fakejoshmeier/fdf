@@ -6,13 +6,13 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 23:46:11 by jmeier            #+#    #+#             */
-/*   Updated: 2018/02/09 01:27:30 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/02/11 16:59:48 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-void	scale(t_xyz *fdf)
+void	zoom(t_xyz *fdf)
 {
 	int		r;
 	int		c;
@@ -36,7 +36,7 @@ void	scale(t_xyz *fdf)
 	}
 }
 
-void	apply_to(t_xyz *fdf, double iter, char check)
+void	pan(t_xyz *fdf, double iter, char check)
 {
 	int r;
 	int c;

@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 19:59:42 by jmeier            #+#    #+#             */
-/*   Updated: 2018/02/09 01:45:14 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/02/11 16:55:37 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,35 +19,36 @@ int		garbage_check(char *str)
 	i = -1;
 	while (str[++i])
 	{
-		if (ft_isalpha(str[i]) || ft_isspace(str[i]))
+		if (ft_isalpha(str[i]))
 			return (1);
 	}
 	return (0);
 }
 
-void	twister(t_xyz *f)
+void	dimension_the_dice(t_jig *twist, int r, int c, char *tmp)
 {
-	int		r;
-	int		c;
+	char	**s;
 
-	r = -1;
-	f->twist = ft_memalloc(sizeof(t_jig *) * f->row);
-	while (++r < f->row)
+	twist->x = r;
+	twist->y = c;
+	if (ft_strchr(tmp, ','))
 	{
-		f->twist[r] = ft_memalloc(sizeof(t_jig) * f->col);
-		ft_bzero(f->twist[r], f->col);
-		c = -1;
-		while (++c < f->col)
-		{
-			f->twist[r][c].x = r;
-			f->twist[r][c].y = c;
-			f->twist[r][c].z = f->bumps[r][c];
-			if (f->bumps[r][c] == 0)
-				f->twist[r][c].iro = 0xFFFFFF;
-			else
-				f->twist[r][c].iro = f->bumps[r][c] > 0 ? 0x66023c : 0x02662c;
-			f->twist[r][c].crossz = f->twist[r][c].z;
-		}
+		s = ft_strsplit(tmp, ',');
+		garbage_check(s[0]) == 0 ? 0 : error("Invalid characters\n");
+		twist->z = ft_atoi(s[0]);
+		twist->iro = ft_atoi_base(s[1], 16);
+		free_array(s);
+		twist->crossz = twist->z;
+	}
+	else
+	{
+		garbage_check(tmp) == 0 ? 0 : error("Invalid characters\n");
+		twist->z = ft_atoi(tmp);
+		if (twist->z == 0)
+			twist->iro = 0xFFFFFF;
+		else
+			twist->iro = twist->z > 0 ? 0x66023c : 0x02662c;
+		twist->crossz = twist->z;
 	}
 }
 
@@ -59,53 +60,49 @@ void	cannibalize(t_xyz *fdf, int fd)
 	int		j;
 
 	i = -1;
-	j = -1;
 	while (get_next_line(fd, &str))
 	{
 		tmp = ft_strsplit(str, ' ');
+		free(str);
 		while (++i < fdf->row)
 		{
-			fdf->bumps[i] = ft_memalloc(sizeof(int) * fdf->col);
-			while (++j < fdf->col)
-			{
-				garbage_check(tmp[j]) == 0 ? 0 : error("Invalid characters\n");
-				fdf->bumps[i][j] = ft_atoi(tmp[j]);
-			}
 			j = -1;
+			fdf->twist[i] = ft_memalloc(sizeof(t_jig) * fdf->col);
+			while (++j < fdf->col)
+				dimension_the_dice(&fdf->twist[i][j], i, j, tmp[j]);
+			free_array(tmp);
 			break ;
 		}
-		free(tmp);
 	}
-	free(str);
 	close(fd);
 }
 
 void	validate(t_xyz *fdf, int fd)
 {
 	char	*str;
-	char	**grid;
 	int		i;
+	int		k;
 
 	while (get_next_line(fd, &str))
 	{
 		i = -1;
-		grid = ft_strsplit(str, ' ');
-		while (grid[++i])
-			;
+		k = 0;
+		while (str[++i])
+			if (ft_isspace(str[i]))
+				++k;
 		if (fdf->row == 0)
 		{
-			fdf->col = i;
+			fdf->col = k;
 			fdf->row = 1;
 		}
 		else
 		{
-			fdf->col == i ? 0 : error("Invalid file\n");
+			fdf->col == k ? 0 : error("Invalid file\n");
 			++fdf->row;
 		}
-		free(grid);
+		free(str);
 	}
-	fdf->bumps = ft_memalloc(sizeof(int *) * fdf->row);
-	free(str);
+	fdf->twist = ft_memalloc(sizeof(t_jig *) * fdf->row);
 	close(fd);
 }
 
@@ -117,5 +114,4 @@ void	parse_suite(t_xyz *fdf, char *av)
 	validate(fdf, fd);
 	fd = open(av, O_RDONLY);
 	cannibalize(fdf, fd);
-	twister(fdf);
 }

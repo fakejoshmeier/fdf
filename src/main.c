@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 18:55:21 by jmeier            #+#    #+#             */
-/*   Updated: 2018/02/10 15:05:36 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/02/11 17:03:33 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		main(int ac, char *av[])
 	fdf.win = mlx_new_window(fdf.mlx, fdf.size, fdf.size, av[1]);
 	fdf.size > 0 ? 0 : error("Window Size Untenable\n");
 	rot_suite(&fdf);
-	scale(&fdf);
+	zoom(&fdf);
 	first_draw(&fdf);
 	mlx_hook(fdf.win, 2, 0, zoom_hook, &fdf);
 	mlx_loop(fdf.mlx);
